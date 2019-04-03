@@ -4,9 +4,7 @@
 #include <cerrno>
 
 
-Sync::Sync(const char *name, bool open) :
-  ISync(),
-  name(name) {
+Sync::Sync(const char *name, bool open) :  ISync(), name(name) {
 
 }
 
