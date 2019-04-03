@@ -22,7 +22,7 @@ ISync* Sync::create(const char *name) {
 
 ISync* Sync::open(const char *name) {
   Sync *sync = new Sync(name, true);
-  sync->semaph = sem_open(name, O_CREAT | O_EXCL, 0660, 0);
+  sync->semaph = sem_open(name, O_CREAT, 0660, 0);
   return sync;
 }
 
