@@ -12,15 +12,17 @@ Sync::~Sync() {
 }
 
 ISync* Sync::create(const char *name) {
+  return new Sync(name, true);
 }
 
-ISync* Sync::open(const char* name) {
+ISync* Sync::open(const char *name) {
 }
 
-void Sync::destroy(const char* name) {
+void Sync::destroy(const char *name) {
 }
 
 void Sync::wait() {
+
 }
 
 void Sync::signal() {
