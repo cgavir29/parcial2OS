@@ -15,14 +15,14 @@ ISync* Sync::create(const char *name) {
   // Creamos un objeto Sync con nombre 'name'
   Sync *sync = new Sync(name, false);
   // Asignamos a sync un nuevo semaforo
-  sync->semaph = sem_open(name, O_CREAT | O_EXCL,0660, 0);
+  sync->semaph = sem_open(name, O_CREAT | O_EXCL, 0660, 0);
   // retornamos el Sync solicitado
   return sync;
 }
 
 ISync* Sync::open(const char *name) {
   Sync *sync = new Sync(name, true);
-  sync->semaph = sem_open(name, O_CREAT | O_EXCL,0660, 0);
+  sync->semaph = sem_open(name, O_CREAT | O_EXCL, 0660, 0);
   return sync;
 }
 
