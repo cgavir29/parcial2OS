@@ -4,7 +4,7 @@
 
 class Sync : public ISync{
     public:
-        Sync(const char *name, bool open) ;
+        Sync(const char *name, bool open);
         ~Sync();
         static ISync* create(const char *name);
         static ISync* open(const char *name);
