@@ -14,5 +14,6 @@ class Sync : public ISync{
         void close();
     private:
         const char *name;
-        // bool open;
+        bool opencito;
+        sem_t *semaph = nullptr;
 };

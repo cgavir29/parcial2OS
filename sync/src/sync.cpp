@@ -4,7 +4,7 @@
 #include <cerrno>
 
 
-Sync::Sync(const char *name, bool open) :  ISync(), name(name) {
+Sync::Sync(const char *name, bool open) :  ISync(), name(name), opencito(open) {
 
 }
 
@@ -12,25 +12,35 @@ Sync::~Sync() {
 }
 
 ISync* Sync::create(const char *name) {
-  return new Sync(name, false);
+  // Creamos un objeto Sync con nombre 'name'
+  Sync *sync = new Sync(name, false);
+  // Asignamos a sync un nuevo semaforo
+  sync->semaph = sem_open(name, O_CREAT | O_EXCL);
+  // retornamos el Sync solicitado
+  return sync;
 }
 
 ISync* Sync::open(const char *name) {
-  // obtener el objeto ISync que se creo en en Sync::create
-  // por medio del 'name', retornar este objeto cambiando open a true
+  Sync *sync = new Sync(name, true);
+  sync->semaph = sem_open(name, O_CREAT | O_EXCL);
+  return sync;
 }
 
 void Sync::destroy(const char *name) {
-  // determinar la instancia de ISync que tiene nombre 'name'
-  // e invocar el destructor en este
+  // Remuevo el semaforo correspondiente al 'name'
+  sem_unlink(name);
+  // Como eliminar el objeto Sync al que pertece el semaforo ???
 }
 
 void Sync::wait() {
-
+  sem_wait(this->semaph);
 }
 
 void Sync::signal() {
+  sem_post(this->semaph);
 }
 
 void Sync::close() {
+  sem_close(this->semaph);
+  this->opencito = false;
 }
